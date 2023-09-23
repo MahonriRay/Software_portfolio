@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <time.h>
+//yayuhhhhh
 
 using namespace std;
 void delay(int mseconds)

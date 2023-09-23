@@ -1,1 +1,1 @@
-print("still tryna figure out gh")
+print("still tryna figure out gh, I'm not doing too well...")
