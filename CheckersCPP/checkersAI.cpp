@@ -50,7 +50,7 @@ class Piece
             system("cls");
             for(int i=0; i<8; i++)
             {
-                cout << " +---+---+---+---+---+---+---+---+" << endl;
+                cout << "  +---+---+---+---+---+---+---+---+" << endl;
                 cout << i + 1 << " | " << Board[i][0] << " | " << Board[i][1] << " | " << Board[i][2] << " | " << Board[i][3] << " | " << Board[i][4] << " | " << Board[i][5] << " | " << Board[i][6] << " | " << Board[i][7] << " |" << endl;
             }
         cout << "  +---+---+---+---+---+---+---+---+" << endl;
@@ -116,7 +116,7 @@ start:
     else if (position [0] == 'G')
         X = 6;
     else if (position [0] == 'H')
-        X = 1;
+        X = 7;
     else{
         cout << "Enter Piece Position Again Please";
         delay(600);
@@ -173,6 +173,154 @@ start:
                 Board[Y][X] = ' ';//clears the position the piece was just at
                 Board[--Y][--X] = A;
                 goto done1;
+            }
+            if (Board[Y - 1][X- 1] == B)
+            {
+                if (X <= 1)//Check to see if user piece trying to capture a piece that would land it outside of the board
+                {
+                    game.cantMove();
+                    goto start;
+                }
+                if (Board[Y - 2][X - 2] != ' ')//Check to see if the location of the jump is anything but an empty space
+                {
+                    game.cantMove();
+                    goto start;
+                }
+                else//Change current location to ' ', and "eliminate" enemy piece by doing the same.
+                {
+                    Board[Y][X] = ' ';
+                    Board[Y - 1][X - 1] = ' ';
+                    Y -= 2;//New location
+                    X -= 2;
+                    Board[Y][X] = A;
+                    goto done1;
+                }
+            }
+        }
+        if(direction == 2)// 2 = Upper-Right
+        {
+            if(X == 7 || Y == 0)//Bottom Right
+            {
+                game.cantMove();
+                goto start;
+            }
+            if (Board[Y - 1][X + 1] == A)//space occupied by same type of piece
+            {
+                game.cantMove();
+                goto start;
+            }
+            if (Board[Y - 1][X + 1] == ' ')//Diagonal space is unoccupied
+            {
+                Board[Y][X] = ' ';
+                Board[--Y][++X] = A;
+                goto done1;
+            }
+            if (Board[Y - 1][X + 1] == B)//UR Diagonal space is opposing piece
+            {
+                if (X >= 6)//6 would be a location that if user were to jump an enemy piece, it would land off the board.
+                {
+                    game.cantMove();
+                    goto start;
+                }
+                if (Board[Y - 2][X + 2] != ' ')//Checks jump position to see if it is anything but ' '
+                {
+                    game.cantMove();
+                    goto start;
+                }
+                else//Change current location to ' ', and "eliminate" enemy piece by doing the same.
+                {
+                    Board[Y][X] = ' ';
+                    Board[Y - 1][X + 1] = ' ';
+                    Y -= 2;
+                    X += 2;
+                    Board[Y][X] = A;
+                    goto done1;
+                }
+            }
+        }
+        if (direction == 3)//Bottom Left - BL
+        {
+            if (X == 0 || Y == 7)//Bottom of the board
+            {
+                game.cantMove();
+                goto start;
+            }
+            if (Board[Y + 1][X - 1] == A)//Space occupied by same type of piece
+            {
+                game.cantMove();
+                goto start;
+            }
+            if (Board[Y + 1][X - 1] == ' ')//Unoccupied Space
+            {
+                Board[Y][X] = ' ';
+                Board[++Y][--X] = A;
+                goto done1;
+            }
+            if (Board[Y + 1][X - 1] == B)//BL Diagonal space is enemy piece
+            {
+                if (X <= 1)//Jumping would land you off the board
+                {
+                    game.cantMove();
+                    goto start;
+                }
+                if (Board[Y + 2][X - 2] != ' ')//Checks jump position to see if it is anything but ' '
+                {
+                    game.cantMove();
+                    goto start;
+                }
+                else//Change current location to ' ', and "eliminate" enemy piece by doing the same.
+                {
+                    Board[Y][X] = ' ';
+                    Board[Y + 1][X - 1] = ' ';
+                    Y += 2;
+                    X -= 2;
+                    Board[Y][X] = A;
+                    goto done1;
+                }
+            }
+        }
+        if (direction == 4)
+        {
+            if (X == 7 || Y == 7)
+            {
+                game.cantMove();
+                goto start;
+            }
+            if (Board[Y + 1][X + 1] == A)
+            {
+                cout << "Piece can't move....";
+                delay(500);
+                goto start;
+            }
+            if (Board[Y + 1][X + 1] == ' ')
+            {
+                Board[Y][X] = ' ';
+                Board[++Y][++X] = A;
+                goto done1;
+            }
+            if (Board[Y + 1][X + 1] == B)
+            {
+                if (X >= 6)
+                {
+                    cout << "Piece can't move....";
+                    delay(500);
+                    goto start;
+                }
+                if (Board[Y + 2][X + 2] != ' ')
+                {
+                    cout << "Piece can't move....";
+                    delay(500);
+                    goto start;
+                }
+                else
+                {
+                    Board[Y][X] = ' ';
+                    Board[Y + 1][X + 1] = ' ';
+                    Y += 2;
+                    X += 2;
+                    Board[Y][X] = A;
+                    goto done1;
+                }
             }
         }
     }
