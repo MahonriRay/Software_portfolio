@@ -21,6 +21,7 @@ bool currentPlayerIsHuman = false;
 
 // }
 
+//Resets the board - used for if the user wants to play again.
 void ResetBoard()
 {
     for(int i = 0; i < 3; i++)
@@ -31,6 +32,7 @@ void ResetBoard()
         }
     }
 }
+//Checks how many spaces are available
 int CheckFreeSpaces()
 {
     int freeSpaces = 9;
@@ -46,6 +48,7 @@ int CheckFreeSpaces()
     }
     return freeSpaces;
 }
+//Prints the board to the terminal. Formate specifier %c will be X(COMPUTER), O(PLAYER), or ' '
 void PrintBoard()
 {
     printf("     |     |     \n");
@@ -59,6 +62,7 @@ void PrintBoard()
     printf("\n     |     |     \n");
     printf("\n");
 }
+//Using the "winner" variable which will be found with the CheckWinner() function, this prints out who won.
 void PrintWinner(char winner)
 {
     if (winner == PLAYER)
@@ -74,6 +78,7 @@ void PrintWinner(char winner)
         cout << "It's a draw... " << endl;
     }
 }
+//Iterates through the board to check for several win conditions. 
 char CheckWinner()
 {
     //Check rows for three in a row
@@ -103,6 +108,7 @@ char CheckWinner()
     }
     return ' ';
 }
+//This function returns a random computer move as long as the space is available.
 void ComputerMove()
 {
     srand(time(0));
@@ -123,6 +129,7 @@ void ComputerMove()
         PrintWinner(' ');
     }
 }
+//Takes input from the user to choose a spot on the board.
 void PlayerMove()
 {
     int x;
@@ -150,15 +157,18 @@ void PlayerMove()
 //AI to make it's move
 int MiniMax(char board[3][3], int depth, bool isMaxing)
 {
+    //Scores are used to weigh the decision of each possibility
     std::map<char, int> scores;
     scores['X'] = 10;
     scores['O'] = -10;
     scores['t'] = 0;
+    //As long as there isn't a winner, the MiniMax algorith will keep going until it finishes, then it will return the score.
     char MMwinner = CheckWinner();
     if (MMwinner != ' ')
     {
         return scores[MMwinner];
     }
+    //Execute this code for the Maximizing side of the algorithm
     if(isMaxing)
     {
         int bestScore= INT_MIN;
@@ -166,11 +176,11 @@ int MiniMax(char board[3][3], int depth, bool isMaxing)
         {
             for (int j = 0; j < 3; j++)
             {
-                if(board[i][j] == ' ')
+                if(board[i][j] == ' ')//Check to see if spot is available
                 {
                     board[i][j] = COMPUTER;
-                    int score = MiniMax(board, depth + 1, false);
-                    board[i][j] = ' ';
+                    int score = MiniMax(board, depth + 1, false);//Will recursively call this function again, but will send it to the else statement 
+                    board[i][j] = ' ';//Clears the spot so that the actual board game won't be affected
                     bestScore = max(score, bestScore);
                 }
             }
@@ -196,10 +206,11 @@ int MiniMax(char board[3][3], int depth, bool isMaxing)
         return bestScore;
     }
 }
+//Setting up for the AI to make it's move
 void BestMove()
 {
-    int bestScore = INT_MIN;
-    int move [] = {0, 0};
+    int bestScore = INT_MIN;//setting best score to be a really small number
+    int move [] = {0, 0};//The array location the computer will make after all calculations are done
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -207,7 +218,7 @@ void BestMove()
             if (board[i][j] == ' ')
             {
                 board[i][j] = COMPUTER;
-                int score = MiniMax(board, 0, false);
+                int score = MiniMax(board, 0, false);//Starts the MiniMax recursive call
                 board[i][j] = ' ';
                 if (score > bestScore)
                 {
