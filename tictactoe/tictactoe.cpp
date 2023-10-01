@@ -11,16 +11,84 @@
 
 using namespace std;
 
-char board[3][3];
+char board[3][3];//2D array that will be the board
 const char PLAYER = 'O';
 const char COMPUTER = 'X';
 bool currentPlayerIsHuman = false;
-// scores = {
-//     X: 10,
-//     O: -10,
 
-// }
-
+//Player Class used for getting input from User and converting input to array location
+class Player
+{
+    public:
+        char character1;
+    
+        //Conver board number to row/column to accomadate my old code
+        tuple<int, int> RowColumn(int userNum)
+        {
+            int x = 0, y = 0;
+            switch (userNum)
+            {
+                case 1:
+                    x = 0, y = 0;  
+                    break;
+                case 2:
+                    x = 0, y = 1;
+                    break;
+                case 3:
+                    x = 0,y = 2;
+                    break;
+                case 4:
+                    x = 1,y = 0;
+                    break;
+                case 5:
+                    x = 1,y = 1;
+                    break;
+                case 6:
+                    x = 1,y = 2;
+                    break;
+                case 7:
+                    x = 2,y = 0;
+                    break;
+                case 8:
+                    x = 2,y = 1;
+                    break;
+                case 9:
+                    x = 2,y = 2;
+                    break;
+                default:
+                    break;
+            }
+            return make_tuple(x,y);
+        }
+        //Takes input from the user to choose a spot on the board.
+        void PlayerMove()
+        {
+            int x;
+            int y;
+            int choice;
+            do
+            {
+                cout << "Enter #1-9(Center square is 5): " << endl;
+                cin >> choice;
+                tuple<int, int> boardCoords = RowColumn(choice);
+                x = get<0>(boardCoords), y = get<1>(boardCoords);
+                // cout << "Enter Column #1-3: " << endl;
+                // cin >> y;
+                // x--;
+                // y--;
+                
+                if(board[x][y] != ' ')
+                {
+                    cout << "Invalid Move" << endl;
+                }
+                else
+                {
+                    board[x][y] = PLAYER;
+                    break;
+                }
+            }while(board[x][y] != ' ');
+        }
+};
 //Resets the board - used for if the user wants to play again.
 void ResetBoard()
 {
@@ -51,16 +119,18 @@ int CheckFreeSpaces()
 //Prints the board to the terminal. Formate specifier %c will be X(COMPUTER), O(PLAYER), or ' '
 void PrintBoard()
 {
-    printf("     |     |     \n");
-    printf("  %c  |  %c  | %c ", board[0][0], board[0][1], board[0][2]);
-    printf("\n_____|_____|_____\n");
-    printf("     |     |     \n");
-    printf("  %c  |  %c  |  %c  ", board[1][0], board[1][1], board[1][2]);
-    printf("\n_____|_____|_____\n");
-    printf("     |     |     \n");
-    printf("  %c  |  %c  |  %c  ", board[2][0], board[2][1], board[2][2]);
-    printf("\n     |     |     \n");
-    printf("\n");
+    system("cls");
+    printf("   1     2     3  \n");
+    printf("      |     |      \n");
+    printf("1  %c  |  %c  |  %c  3", board[0][0], board[0][1], board[0][2]);
+    printf("\n _____|_____|_____ \n");
+    printf("      |     |      \n");
+    printf("4  %c  |  %c  |  %c  6", board[1][0], board[1][1], board[1][2]);
+    printf("\n _____|_____|_____ \n");
+    printf("      |     |      \n");
+    printf("7  %c  |  %c  |  %c  9", board[2][0], board[2][1], board[2][2]);
+    printf("\n      |     |     \n");
+    printf("   7     8     9   \n");
 }
 //Using the "winner" variable which will be found with the CheckWinner() function, this prints out who won.
 void PrintWinner(char winner)
@@ -128,31 +198,6 @@ void ComputerMove()
     {
         PrintWinner(' ');
     }
-}
-//Takes input from the user to choose a spot on the board.
-void PlayerMove()
-{
-    int x;
-    int y;
-    do
-    {
-        cout << "Enter Row #1-3: " << endl;
-        cin >> x;
-        cout << "Enter Column #1-3: " << endl;
-        cin >> y;
-        x--;
-        y--;
-        
-        if(board[x][y] != ' ')
-        {
-            cout << "Invalid Move" << endl;
-        }
-        else
-        {
-            board[x][y] = PLAYER;
-            break;
-        }
-    }while(board[x][y] != ' ');
 }
 //AI to make it's move
 int MiniMax(char board[3][3], int depth, bool isMaxing)
@@ -236,15 +281,15 @@ void BestMove()
 int main()
 {
     char winner = ' ';
-    char response;
-
+    char response = 'Y';
+    Player player;
     do
     {
         winner = ' ';
         response = ' ';
         ResetBoard();
 
-        while (winner = ' ' && CheckFreeSpaces() != 0)
+        while (winner == ' ' && CheckFreeSpaces() != 0)
         {
             PrintBoard();
 
@@ -257,7 +302,7 @@ int main()
             {
                 break;
             }
-            PlayerMove();
+            player.PlayerMove();
             winner = CheckWinner();
             if (winner != ' ' || CheckFreeSpaces() == 0)
             {
@@ -267,8 +312,37 @@ int main()
         PrintBoard();
         PrintWinner(winner);
 
-        cout << "Would you like to play again?(Y/N) " << endl;
-        cin.uppercase >> response; 
-    }while(response == 'Y');
+        cout << "Would you like to play again?(Y/N): " << endl;
+        cin >> response; 
+    }while(toupper(response) == 'Y');
     cout << "Thanks for playing!" << endl << endl;
 }
+
+
+
+
+//Takes input from the user to choose a spot on the board.
+// void PlayerMove()
+// {
+//     int x;
+//     int y;
+//     do
+//     {
+//         cout << "Enter Row #1-3: " << endl;
+//         cin >> x;
+//         cout << "Enter Column #1-3: " << endl;
+//         cin >> y;
+//         x--;
+//         y--;
+        
+//         if(board[x][y] != ' ')
+//         {
+//             cout << "Invalid Move" << endl;
+//         }
+//         else
+//         {
+//             board[x][y] = PLAYER;
+//             break;
+//         }
+//     }while(board[x][y] != ' ');
+// }
