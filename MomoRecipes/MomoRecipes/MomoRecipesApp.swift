@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct MomoRecipesApp: App {
+    @StateObject var recipesViewModel = RecipesViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(recipesViewModel)
         }
     }
 }

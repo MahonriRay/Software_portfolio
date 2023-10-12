@@ -8,13 +8,27 @@
 import SwiftUI
 
 struct CategoryView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    @EnvironmentObject var recipesVM: RecipesViewModel
+    
+    var category: Category
+    
+    //Compute Property? function?
+    var recipes: [Recipe] {
+        return recipesVM.recipes.filter{$0.category == category.rawValue}
+        }
+        
+        var body: some View {
+            ScrollView{
+                RecipeList(recipes: recipes)
+            }
+            .navigationTitle(category.rawValue + "s")
     }
 }
 
+
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView()
+        CategoryView(category: Category.dessert)
+            .environmentObject(RecipesViewModel())
     }
 }
