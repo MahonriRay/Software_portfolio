@@ -10,6 +10,7 @@
 		6C3A4DC82AD2330300E792C7 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A4DC72AD2330300E792C7 /* CategoryView.swift */; };
 		6C3A4DCA2AD35F6500E792C7 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A4DC92AD35F6500E792C7 /* AddRecipeView.swift */; };
 		6C3A4DCC2AD37AE300E792C7 /* RecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A4DCB2AD37AE300E792C7 /* RecipesViewModel.swift */; };
+		6C3B021E2ADB1E41000FB619 /* ReadWriteFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3B021D2ADB1E41000FB619 /* ReadWriteFile.swift */; };
 		6C9742972AD1FA2700D77AA7 /* MomoRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9742962AD1FA2700D77AA7 /* MomoRecipesApp.swift */; };
 		6C9742992AD1FA2700D77AA7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9742982AD1FA2700D77AA7 /* ContentView.swift */; };
 		6C97429B2AD1FA2700D77AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C97429A2AD1FA2700D77AA7 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		6C3A4DC72AD2330300E792C7 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		6C3A4DC92AD35F6500E792C7 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		6C3A4DCB2AD37AE300E792C7 /* RecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewModel.swift; sourceTree = "<group>"; };
+		6C3B021D2ADB1E41000FB619 /* ReadWriteFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteFile.swift; sourceTree = "<group>"; };
 		6C9742932AD1FA2700D77AA7 /* MomoRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MomoRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C9742962AD1FA2700D77AA7 /* MomoRecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomoRecipesApp.swift; sourceTree = "<group>"; };
 		6C9742982AD1FA2700D77AA7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				6C9742B82AD1FD2B00D77AA7 /* NewRecipeView.swift */,
 				6C9742BA2AD1FD4100D77AA7 /* FavoritesView.swift */,
 				6C9742BC2AD1FD4A00D77AA7 /* SettingsView.swift */,
+				6C3B021D2ADB1E41000FB619 /* ReadWriteFile.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				6C9742992AD1FA2700D77AA7 /* ContentView.swift in Sources */,
 				6C3A4DCC2AD37AE300E792C7 /* RecipesViewModel.swift in Sources */,
 				6C9742972AD1FA2700D77AA7 /* MomoRecipesApp.swift in Sources */,
+				6C3B021E2ADB1E41000FB619 /* ReadWriteFile.swift in Sources */,
 				6C9742C12AD202D400D77AA7 /* RecipeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

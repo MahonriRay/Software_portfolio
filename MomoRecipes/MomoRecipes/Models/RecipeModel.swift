@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Category : String, CaseIterable, Identifiable{
     var id: String {self.rawValue}
@@ -33,7 +34,11 @@ struct Recipe: Identifiable{
     let url : String
 }
 
+
+
 extension Recipe{
+    
+    
     static let all: [Recipe] = [
     Recipe(name: "ButterScotch Cookies",
            image: "https://thesaltymarshmallow.com/wp-content/uploads/2017/06/butterscotch-chip-cookies1.jpg",

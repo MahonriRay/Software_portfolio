@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    let rwFile = ReadWriteFile()
+    init(){
+        rwFile.viewDidLoad()
+    }
+    
     var body: some View {
         TabBar()
     }
