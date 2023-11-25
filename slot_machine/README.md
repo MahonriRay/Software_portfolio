@@ -25,7 +25,6 @@ For this project I worked entirely in Visual Studio Code. With the use of NodeJS
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
 
 - Check diagonally to see if symbols match
 - Take it out of the command line and implement it online with the use of HTML and CSS
