@@ -22,7 +22,7 @@ For this project I worked entirely in Visual Studio Code. With the use of NodeJS
 {Make a list of websites that you found helpful in this project}
 
 - [Tech With Tim](https://www.youtube.com/watch?v=E3XxeE7NF30)
-- [W#Schools](https://www.w3schools.com/js/)
+- [W3Schools](https://www.w3schools.com/js/)
 
 # Future Work
 
